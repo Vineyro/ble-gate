@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5)
 
-project(ble-gate C)
+PROJECT(ble-gate C)
 
 SET(SOURCES main.c)
 
-add_executable(ble-gate ${SOURCES})
+ADD_EXECUTABLE(ble-gate ${SOURCES})
 
 SET(CMAKE_INSTALL_PREFIX /)
 
-install(TARGERTS ble-gate
+INSTALL(TARGERTS ble-gate
         RUNTIME DESTINATION sbin
 )
