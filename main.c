@@ -5,8 +5,8 @@
 
 int main(int argc, char **argv)
 {
-    system("logger -s started");
-
+    
+    printf("\nHello, world!\n\n");
     return 0;
 
 }
