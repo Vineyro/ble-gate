@@ -397,13 +397,14 @@ int main(int argc, char *argv[])
 		default_tx[0] = TABLE_READ;
 		//bits = 8;
 		transfer(fd, default_tx, default_rx, 1);
-    //print_file();
-    sleep(0.01);
-    //print_file();
+        //print_file();
+        sleep(0.01);
+        //print_file();
 		memset(default_tx, 0x00, 4);
 		default_tx[0] = TABLE_READ_CONTINUE;
 		//bits = 8;
-		transfer(fd, default_tx, (uint8_t *)&my_ble_id_table, 4);sleep(0.01);
+		transfer(fd, default_tx, (uint8_t *)&my_ble_id_table, 4);
+        sleep(0.01);
 		SWAP_16(my_ble_id_table.size);
 		SWAP_16(my_ble_id_table.count);
 		//printf("my_ble_id_table[0,1,2,3]: 0x%2x 0x%2x 0x%2x 0x%2x\n", (uint8_t *)&my_ble_id_table, (uint8_t *)&my_ble_id_table+1, (uint8_t *)&my_ble_id_table+2, (uint8_t *)&my_ble_id_table+3);
@@ -412,28 +413,32 @@ int main(int argc, char *argv[])
 		while (my_ble_id_table.count > 0){
 			memset(default_tx, 0x00, 10);
 			default_tx[0] = TABLE_READ_CONTINUE;
-		bits = 8;
-			transfer(fd, default_tx, (uint8_t *)&my_ble_id_table.cells, 10);sleep(0.01);
+		    bits = 8;
+			transfer(fd, default_tx, (uint8_t *)&my_ble_id_table.cells, 10);
+            sleep(0.01);
 
 			printf("ID: %02X:%02X:%02X:%02X:%02X:%02X tx_pow:"\
 				, my_ble_id_table.cells[0].addr[5], my_ble_id_table.cells[0].addr[4], my_ble_id_table.cells[0].addr[3]\
 				, my_ble_id_table.cells[0].addr[2], my_ble_id_table.cells[0].addr[1], my_ble_id_table.cells[0].addr[0]);
 			if(my_ble_id_table.cells[0].tx_power_level == -127){
 				printf("  ?     ");
-			}else{printf("%3d dBm ",my_ble_id_table.cells[0].tx_power_level);}
+			}else{
+                printf("%3d dBm ",my_ble_id_table.cells[0].tx_power_level);
+            
+            }
 			switch (my_ble_id_table.cells[0].m_data_0_dev_type){
 			    case 1:
-				printf("bat:%3d%% rec:%3d type: ArmA M1.2\n", my_ble_id_table.cells[0].m_data_1_bat_lvl, my_ble_id_table.cells[0].m_data_2_rec_flag);
-			    break;
+				    printf("bat:%3d%% rec:%3d type: ArmA M1.2\n", my_ble_id_table.cells[0].m_data_1_bat_lvl, my_ble_id_table.cells[0].m_data_2_rec_flag);
+			        break;
 			    case 2:
-				printf("bat:%3d%% rec:%3d type: ArmA M1.3\n", my_ble_id_table.cells[0].m_data_1_bat_lvl, my_ble_id_table.cells[0].m_data_2_rec_flag);
-			    break;
+				    printf("bat:%3d%% rec:%3d type: ArmA M1.3\n", my_ble_id_table.cells[0].m_data_1_bat_lvl, my_ble_id_table.cells[0].m_data_2_rec_flag);
+			        break;
 			    case 3:
-				printf("bat:%3d%% rec:%3d type: ArmA M1.6\n", my_ble_id_table.cells[0].m_data_1_bat_lvl, my_ble_id_table.cells[0].m_data_2_rec_flag);
-			    break;
+                    printf("bat:%3d%% rec:%3d type: ArmA M1.6\n", my_ble_id_table.cells[0].m_data_1_bat_lvl, my_ble_id_table.cells[0].m_data_2_rec_flag);
+                    break;
 			    default:
-				printf("                 type: unknown\n");
-			    break;
+                    printf("                 type: unknown\n");
+                    break;
 			};
 
 			my_ble_id_table.count--;
