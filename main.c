@@ -107,13 +107,33 @@ int main(int argc, char *argv[])
     system("logger -s Hello from ble-gate");
 
     int		c;
-	int		readcount = 10;
-	int		msglen = 10;
+	int		readcount = 0;
+	int		msglen = 0;
 	int		fd;
 	const char *name = "/dev/spidev1.0";
 
+    while ((c = getopt(argc, argv, "nm:r:v")) != EOF) {
+		switch (c) {
+		case 'm':
+			msglen = atoi(optarg);
+			continue;
+		case 'r':
+			readcount = atoi(optarg);
+			continue;
+		case 'v':
+			verbose++;
+			continue;
+		case 'n':
+            name = optarg;
+            continue;
+		case '?': 
+			return 1;
+		}
+	}
+
+
 	fd = open(name, O_RDWR);
-    
+
 	if (fd < 0) {
 		perror("open");
 		return 1;
