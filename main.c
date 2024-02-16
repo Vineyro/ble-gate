@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
 	int		fd;
 	const char *name = "/dev/spidev1.0";
 
-    while ((c = getopt(argc, argv, "nm:r:v")) != EOF) {
+    while ((c = getopt(argc, argv, "n:m:r")) != EOF) {
 		switch (c) {
 		case 'm':
 			msglen = atoi(optarg);
