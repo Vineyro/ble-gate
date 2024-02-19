@@ -403,8 +403,9 @@ int main(int argc, char *argv[])
 		memset(default_tx, 0x00, 4);
 		default_tx[0] = TABLE_READ_CONTINUE;
 		//bits = 8;
-		transfer(fd, default_tx, (uint8_t *)&my_ble_id_table, 6);
+		transfer(fd, default_tx, (uint8_t *)&my_ble_id_table, 4);
         sleep(0.01);
+        printf("size: %d count: %d\n", my_ble_id_table.size , my_ble_id_table.count);
 		SWAP_16(my_ble_id_table.size);
 		SWAP_16(my_ble_id_table.count);
 		//printf("my_ble_id_table[0,1,2,3]: 0x%2x 0x%2x 0x%2x 0x%2x\n", (uint8_t *)&my_ble_id_table, (uint8_t *)&my_ble_id_table+1, (uint8_t *)&my_ble_id_table+2, (uint8_t *)&my_ble_id_table+3);
