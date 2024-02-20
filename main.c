@@ -16,7 +16,6 @@
 
 #include <libubox/blobmsg_json.h>
 #include "libubus.h"
-#include "count.h"
 
 static struct ubus_context *ctx;
 static struct ubus_subscriber test_event;
